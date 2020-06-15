@@ -29,7 +29,7 @@ var indexRoutes = require('./routes/index');
 var blogRoutes = require('./routes/blog.js');
 //Requirements
 mongoose
-    .connect('mongodb+srv://vedant:1234@yelpcampdb-x41l3.mongodb.net/yelp-camp?retryWrites=true&w=majority', {
+    .connect(process.env.MONGODB_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false,

@@ -1,0 +1,13 @@
+.item {
+    font-size: 1.3rem;
+}
+
+@media screen and (max-width: 700px) {
+    .item {
+        font-size: 1rem;
+    }
+}
+
+.menu {
+    border-radius: 0 !important;
+}

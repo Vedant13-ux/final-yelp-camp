@@ -1,0 +1,137 @@
+<%-include("../partials/headerCamp")%>
+    <link rel="stylesheet" href="/campground/campgrounds.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/card.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/input.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/header.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/form.min.css">
+    <link rel="stylesheet" href="/image.min.css">
+    </head>
+
+    <body>
+        <%-include("../partials/nav")%>
+
+
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9 order-lg-2 order-1">
+                        <header class="jumbotron">
+                            <h1 class=" display-sm-3 display-lg-2 display-4">Welcome to YelpCamp</h1>
+                            <p class="lead">View our hand-picked camgrounds from all over the world!</p>
+                            <a href="/campgrounds/new" class="btn btn-primary ml-1">Add New Campground</a>
+                            <a href="/blogs" class="btn btn-info ml-1">View YelpCamp Blogs</a>
+                        </header>
+                    </div>
+
+                    <div class="col-lg-3 order-lg-1 order-1">
+                        <div class="jumbotron text-center">
+                            <div class="ui icon header" style="font-size:19px;line-height: 26px;">
+                                <i class="search icon"></i><span class="findby"> Find By Name or Location</span>
+                            </div>
+                            <form action="/campgrounds" method="GET" class="ui form mt-1">
+                                <div class="field mt-2">
+                                    <div class="ui search">
+                                        <div class="ui icon input">
+                                            <input type="text" class="prompt" placeholder="Search campgrounds..." name="search" style="border-radius: 30px;">
+                                            <i class="search icon"></i>
+                                        </div>
+                                        <div class="results"></div>
+                                    </div>
+                                </div>
+                                <%if(noMatch){%>
+                                    <span class="lead"><%=noMatch%></span>
+                                    <%} %>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row" id="mainpage">
+
+                    <%campGrounds.forEach(function(campground){%>
+                        <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 d-flex justify-content-between">
+                            <div class="ui fluid raised link card mx-auto mb-3" style="color:white;background:none;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgb(0, 0, 26,0.5)">
+
+                                <img class="campimg" src="<%=campground.image%>">
+                                <div class="card-body border-top-0" style="background:rgb(255, 187, 153,0.3)">
+                                    <h5 class="card-title">
+                                        <%=campground.name%>
+                                    </h5>
+                                    <p class="card-text" style="font-weight:400;text-shadow:2px 1 px rgba(115,115,115,0.3)">
+                                        <%-campground.description.substring(0,140)%>..<a class="readmore" href="campgrounds/<%=campground._id%>">Read More</a>
+                                    </p>
+                                    <p class="card-text">
+                                        <small><i class="fas fa-map-marker-alt mr-1"></i><%=campground.location%></small>
+                                    </p>
+                                    <div class="footer">
+
+                                        <!-- <button class="btn btn-outline-danger btn-sm mr-2 like" style="font-size:1.37rem;padding:0.025rem 0.4rem;">
+									        <i class="fab fa-free-code-camp"></i>
+                                        </button> -->
+                                        <!-- <div style="display: inline">
+                                            <button onclick="actOnPost(event);" data-post-id="<%=campground._id%>">Like
+                                            </button>
+                                            <span id="likes-count-<%=campground._id%>"><%=campground.likes_count%></span>
+                                        </div> -->
+
+
+                                        <a href="/campgrounds/<%=campground._id%>" class="btn btn-info btn-sm font-weight-normal"><i class="fas fa-info-circle mr-1"></i>More Info</a href=/cmapgr>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <%});%>
+
+                </div>
+            </div>
+
+
+
+
+
+            <%-include("../partials/footer")%>
+                <!-- <script async>
+                    $(document).ready(function() {
+                        $("#mainNav").addClass('fixed-top');
+                        $("#mainNav").hide();
+                        $(window).scroll(function() {
+                            $(this).scrollTop() > $("#mainNav").height() ? $('#mainNav').fadeIn() : $('#mainNav').fadeOut();
+                        });
+                    });
+                    
+
+                </script> -->
+                <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+                <script>
+                    var updatePostStats = {
+                        Like: function (postId) {
+                            document.querySelector('#likes-count-' + postId).textContent++;
+                        },
+                        Unlike: function(postId) {
+                            document.querySelector('#likes-count-' + postId).textContent--;
+                        }
+                    };
+            
+                    var toggleButtonText = {
+                        Like: function(button) {
+                            button.textContent = "Unlike";
+                        },
+                        Unlike: function(button) {
+                            button.textContent = "Like";
+                        }
+                    };
+            
+                    var actOnPost = function (event) {
+                        var postId = event.target.dataset.postId;
+                        var action = event.target.textContent.trim();
+                        toggleButtonText[action](event.target);
+                        updatePostStats[action](postId);
+                        var isliked;
+                        axios.post('/campgrounds/' + postId + '/like', { action: action ,isLiked:isLiked});
+                    };
+                </script> -->
+    </body>
+
+    </html>

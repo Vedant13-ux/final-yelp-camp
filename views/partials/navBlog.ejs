@@ -1,0 +1,56 @@
+<div class="ui  menu  top attached  mb-1 inverted" style="background:rgb(51, 51, 51)">
+    <div class="ui container">
+
+        <div class="ui simple dropdown item p-0">
+            <div class="item"><i class="fas fa-campground mr-1"></i> YelpCamp Blogs<i class="dropdown icon"></i>
+            </div>
+
+            <div class="menu">
+                <a href="/campgrounds" class="item"><i class="fas fa-campground mr-1"></i>
+        YelpCamp</a>
+            </div>
+        </div>
+
+        <a href="/blogs" class="item"><i class="fas fa-home mr-1"></i>Home</a>
+        <a href="/blogs/new" class="item"><i class="fas fa-pen-square mr-1"></i>Create Blog</a>
+        <div class="right menu">
+            <%if(currentUser){ %>
+                <a class="item" href="/logout"><i class="fas fa-sign-out-alt mr-1"></i>Logout</a>
+                <a class="ui label teal p-1 mt-2 px-3" style="font-size: 1rem;font-weight: 500 !important;white-space: nowrap;height:35px;">
+                    <%if(currentUser.gender=="male"){%>
+                        <span class="ui avatar image">
+                            <img src="/media/male-avatar-profile-icon-round-african-american-vector-18307210.jpg">
+                        </span>
+                        <%}else{ %>
+                            <span class="ui avatar image">
+                                <img src="/media/female-avatar-profile-icon-round-african-american-vector-18307279.jpg">
+                            </span>
+                            <%}%>
+                                <%=currentUser.username%>
+                </a>
+
+                <% }else{ %>
+                    <a class="item" href="/login"><i class="fas fa-sign-in-alt mr-1"></i>Login</a>
+                    <a class="item" href="signup"><i class="fas fa-user-plus mr-1"></i>Signup</a>
+                    <%} %>
+
+        </div>
+    </div>
+</div>
+<div class="container mt-5">
+    <%if(error&&error.length>0){ %>
+        <div class="ui warning message" id="error">
+            <i class="close icon" style="cursor:pointer"></i>
+            <div class="text">
+                <%=error %>
+            </div>
+        </div>
+        <% } %>
+            <%if(success&&success.length>0){%>
+                <div class="message alert alert-success" id="success">
+                    <%=success%>
+                        <i class="close icon mr-auto" style="cursor:pointer"></i>
+                </div>
+                <%}%>
+
+</div>
